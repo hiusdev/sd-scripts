@@ -15,10 +15,10 @@ import os
 from anime_face_detector import create_detector
 from tqdm import tqdm
 import numpy as np
-from library.utils import setup_logging
-setup_logging()
-import logging
-logger = logging.getLogger(__name__)
+# from library.utils import setup_logging
+# setup_logging()
+# import logging
+# logger = logging.getLogger(__name__)
 
 KP_REYE = 11
 KP_LEYE = 19
@@ -28,7 +28,7 @@ SCORE_THRES = 0.90
 
 def detect_faces(detector, image, min_size):
   preds = detector(image)                     # bgr
-  # logger.info(len(preds))
+  # print(len(preds))
 
   faces = []
   for pred in preds:
@@ -82,7 +82,7 @@ def process(args):
   assert args.crop_ratio is None or args.resize_face_size is None, f"crop_ratio指定時はresize_face_sizeは指定できません"
 
   # アニメ顔検出モデルを読み込む
-  logger.info("loading face detector.")
+  print("loading face detector.")
   detector = create_detector('yolov3')
 
   # cropの引数を解析する
@@ -101,7 +101,7 @@ def process(args):
     crop_h_ratio, crop_v_ratio = [float(t) for t in tokens]
 
   # 画像を処理する
-  logger.info("processing.")
+  print("processing.")
   output_extension = ".png"
 
   os.makedirs(args.dst_dir, exist_ok=True)
@@ -202,7 +202,7 @@ def process(args):
         face_img = face_img[y:y + cur_crop_height]
 
       # # debug
-      # logger.info(path, cx, cy, angle)
+      # print(path, cx, cy, angle)
       # crp = cv2.resize(image, (image.shape[1]//8, image.shape[0]//8))
       # cv2.imshow("image", crp)
       # if cv2.waitKey() == 27:

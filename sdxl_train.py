@@ -21,7 +21,7 @@ from library import deepspeed_utils, sdxl_model_util
 
 import library.train_util as train_util
 
-from library.utils import setup_logging, add_logging_arguments
+# from library.utils import setup_logging, add_logging_arguments
 
 # setup_logging()
 # import logging
@@ -101,7 +101,7 @@ def train(args):
     train_util.prepare_dataset_args(args, True)
     sdxl_train_util.verify_sdxl_training_args(args)
     deepspeed_utils.prepare_deepspeed_args(args)
-    setup_logging(args, reset=True)
+    # setup_logging(args, reset=True)
 
     assert (
         not args.weighted_captions
@@ -764,7 +764,7 @@ def train(args):
 def setup_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser()
 
-    add_logging_arguments(parser)
+    # add_logging_arguments(parser)
     train_util.add_sd_models_arguments(parser)
     train_util.add_dataset_arguments(parser, True, True, True)
     train_util.add_training_arguments(parser, False)
