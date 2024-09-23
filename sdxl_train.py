@@ -142,6 +142,7 @@ def train(args):
         else:
             if use_dreambooth_method:
                 print("Using DreamBooth method.")
+                print(args.train_data_dir)
                 user_config = {
                     "datasets": [
                         {
@@ -167,6 +168,7 @@ def train(args):
                 }
 
         blueprint = blueprint_generator.generate(user_config, args, tokenizer=[tokenizer1, tokenizer2])
+        print(blueprint)
         train_dataset_group = config_util.generate_dataset_group_by_blueprint(blueprint.dataset_group)
     else:
         train_dataset_group = train_util.load_arbitrary_dataset(args, [tokenizer1, tokenizer2])
